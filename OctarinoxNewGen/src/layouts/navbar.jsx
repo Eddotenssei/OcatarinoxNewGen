@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 
+
 export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 shadow-md">
@@ -15,10 +16,10 @@ export default function Navbar() {
 
         <li>
           <Link
-            to="/about"
+            to="/aboutUs"
             className="hover:text-cyan-400 transition-colors duration-200"
           >
-            About
+            About us
           </Link>
         </li>
 
