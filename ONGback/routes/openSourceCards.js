@@ -3,9 +3,9 @@ import { supabase } from "../data/db.js";
 
 const router = express.Router();
 
-/**
- * GET all open source cards
- */
+
+// GET all open source cards
+
 router.get("/", async (req, res) => {
   const { data, error } = await supabase
     .from("openSourceCards")
@@ -18,9 +18,9 @@ router.get("/", async (req, res) => {
   res.json(data);
 });
 
-/**
- * POST new open source card
- */
+
+// POST new open source card
+
 router.post("/", async (req, res) => {
   const {
     title,
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
         page_url,
       },
     ])
-    .select(); // returns inserted row
+    .select();
 
   if (error) {
     return res.status(500).json({ error: error.message });
