@@ -1,9 +1,8 @@
 import Card from "../component/card";
+import abtUs from "../component/abtUs"
 
 export default function AboutUS(){
     return (
-        <h1>
-            <Card title="About us" text="ragaca about usze"/>
-        </h1>
+        <abtUs/>
     )
 }
