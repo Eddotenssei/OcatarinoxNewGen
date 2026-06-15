@@ -1,8 +1,6 @@
 import Card from "../component/card";
-import abtUs from "../component/abtUs"
+import AboutUs from "../component/abtUs";
 
-export default function AboutUS(){
-    return (
-        <abtUs/>
-    )
+export default function AboutUS() {
+  return <AboutUs />;
 }

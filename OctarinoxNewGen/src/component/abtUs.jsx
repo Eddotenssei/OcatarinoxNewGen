@@ -1,4 +1,4 @@
-export default function OctarinoXNewGen() {
+export default function AboutUs() {
   const developers = [
     {
       name: "ალექსანდრე",
