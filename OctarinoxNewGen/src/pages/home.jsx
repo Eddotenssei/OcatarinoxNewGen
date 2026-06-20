@@ -8,6 +8,7 @@ export default function Home() {
       <OpenSourceInfo />
       <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-60" />
       <OpenSourceLicensesInfo />
+      <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-60" />
       <CodeCards/>
     </>
   );
