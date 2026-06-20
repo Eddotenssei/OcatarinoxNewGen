@@ -6,7 +6,9 @@ export default function OpenSourceLicensesInfo() {
         {/* პირველი ქარდი */}
         <div className="w-full bg-[#161b22] border border-white/10 rounded-3xl p-10">
           
-          <h1 className="text-5xl font-bold text-white mb-8 text-center">
+          <h1 className="text-5xl font-bold text-center mb-8 
+            bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
+            bg-clip-text text-transparent">
             Open Source Licenses
           </h1>
 
