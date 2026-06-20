@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-// 1. ფილტრის ღილაკების მასივი
 const LANGUAGES = ["ყველა", "JavaScript", "Python", "Rust", "Go", "TypeScript", "C++"];
 
-// 2. ბარათების მონაცემები
 const CARDS = [
   {
     id: 1,
