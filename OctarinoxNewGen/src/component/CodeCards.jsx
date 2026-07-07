@@ -25,15 +25,30 @@ export default function CodeCards() {
     getCards();
   }, []);
 
+  // Create individual language filters
   const languages = [
     "ყველა",
-    ...new Set(cards.map((card) => card.programming_language).filter(Boolean)),
+    ...new Set(
+      cards.flatMap((card) =>
+        card.programming_language
+          ? card.programming_language
+              .split(",")
+              .map((lang) => lang.trim())
+          : []
+      )
+    ),
   ];
 
+  // Filter cards by selected language
   const filteredCards =
     activeFilter === "ყველა"
       ? cards
-      : cards.filter((card) => card.programming_language === activeFilter);
+      : cards.filter((card) =>
+          card.programming_language
+            ?.split(",")
+            .map((lang) => lang.trim())
+            .includes(activeFilter)
+        );
 
   if (loading) {
     return (
@@ -46,6 +61,7 @@ export default function CodeCards() {
   return (
     <div className="min-h-screen bg-[#0a0a14] font-mono text-gray-200 p-6 flex flex-col items-center justify-center">
       <div className="w-full max-w-[1330px] min-h-[650px] bg-[#11111b]/50 rounded-2xl border border-white/5 py-[72px] px-10 shadow-xl backdrop-blur-sm flex flex-col">
+
         {/* Filter Buttons */}
         <div className="flex justify-between items-center gap-4 mb-8 pb-6 border-b border-white/5">
           <div className="flex gap-2 flex-wrap">
@@ -68,8 +84,11 @@ export default function CodeCards() {
             })}
           </div>
 
-          <p className="text-gray-500 text-xs">{filteredCards.length} ბარათი</p>
+          <p className="text-gray-500 text-xs">
+            {filteredCards.length} ბარათი
+          </p>
         </div>
+
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
@@ -83,6 +102,7 @@ export default function CodeCards() {
               }}
               className="bg-[#11111b] border border-white/5 rounded-xl p-5 cursor-pointer hover:border-white/20 transition-all hover:-translate-y-1 flex flex-col"
             >
+
               {card.image && (
                 <img
                   src={card.image}
@@ -91,21 +111,37 @@ export default function CodeCards() {
                 />
               )}
 
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded bg-blue-500/10 text-blue-400">
-                  {card.programming_language}
-                </span>
 
-                <span className="text-gray-600 text-sm">↗</span>
+              {/* Language Tags */}
+              <div className="flex flex-wrap gap-2 mb-3">
+                {card.programming_language
+                  ?.split(",")
+                  .map((lang) => (
+                    <span
+                      key={lang}
+                      className="text-[10px] font-bold px-2.5 py-1 rounded bg-blue-500/10 text-blue-400"
+                    >
+                      {lang.trim()}
+                    </span>
+                  ))}
               </div>
 
-              <h3 className="text-white font-bold text-sm mb-2">
-                {card.title}
-              </h3>
+
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-white font-bold text-sm">
+                  {card.title}
+                </h3>
+
+                <span className="text-gray-600 text-sm">
+                  ↗
+                </span>
+              </div>
+
 
               <p className="text-gray-400 text-[11px] leading-relaxed">
                 {card.content}
               </p>
+
 
               {card.github_url && (
                 <a
@@ -118,15 +154,18 @@ export default function CodeCards() {
                   GitHub →
                 </a>
               )}
+
             </div>
           ))}
         </div>
+
 
         {filteredCards.length === 0 && (
           <div className="text-center text-gray-600 text-sm my-auto py-16">
             ბარათები ვერ მოიძებნა
           </div>
         )}
+
       </div>
     </div>
   );
