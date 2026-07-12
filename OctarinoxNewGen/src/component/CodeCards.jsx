@@ -26,29 +26,35 @@ export default function CodeCards() {
   }, []);
 
   // Create individual language filters
-  const languages = [
-    "ყველა",
-    ...new Set(
-      cards.flatMap((card) =>
-        card.programming_language
-          ? card.programming_language
-              .split(",")
-              .map((lang) => lang.trim())
-          : []
-      )
-    ),
-  ];
+const languages = [
+  "ყველა",
+  ...new Set(
+    cards.flatMap((card) =>
+      card.programming_language
+        ? card.programming_language
+            .split(",")
+            .map((lang) => lang.trim())
+            .filter(Boolean)
+            .map(
+              (lang) =>
+                lang.charAt(0).toUpperCase() +
+                lang.slice(1).toLowerCase()
+            )
+        : []
+    )
+  ),
+];
 
   // Filter cards by selected language
-  const filteredCards =
-    activeFilter === "ყველა"
-      ? cards
-      : cards.filter((card) =>
-          card.programming_language
-            ?.split(",")
-            .map((lang) => lang.trim())
-            .includes(activeFilter)
-        );
+const filteredCards =
+  activeFilter === "ყველა"
+    ? cards
+    : cards.filter((card) =>
+        card.programming_language
+          ?.split(",")
+          .map((lang) => lang.trim().toLowerCase())
+          .includes(activeFilter.toLowerCase())
+      );
 
   if (loading) {
     return (
