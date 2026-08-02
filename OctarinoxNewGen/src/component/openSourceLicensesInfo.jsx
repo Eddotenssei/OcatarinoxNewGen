@@ -7,9 +7,9 @@ export default function OpenSourceLicensesInfo() {
       <div className="w-full bg-[#161b22] border border-white/10 rounded-3xl p-10 flex flex-col gap-10">
 
         {/* Title */}
-        <h1 className="text-5xl font-bold text-center 
-          bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
-          bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold text-center mb-10 pb-2 leading-tight
+  bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400
+  bg-clip-text text-transparent">
           Open Source Licenses
         </h1>
 

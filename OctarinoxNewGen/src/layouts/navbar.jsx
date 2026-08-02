@@ -44,6 +44,14 @@ export default function Navbar() {
             Contact
           </Link>
         </li>
+        <li>
+          <Link
+            to="/blogs"
+            className="hover:text-fuchsia-400 transition-colors duration-200"
+          >
+            Blogs
+          </Link>
+        </li>
       </ul>
     </nav>
   );

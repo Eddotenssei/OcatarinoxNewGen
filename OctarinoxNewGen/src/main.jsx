@@ -9,6 +9,7 @@ import Layout from './layouts/layout';
 import Home from './pages/home';
 import Contact from './pages/contact';
 import AboutUS from './pages/aboutUs';
+import Blogs from './pages/Blogs';
 
 
 
@@ -29,7 +30,12 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />
       }
+
     ],
   },
 ]);
