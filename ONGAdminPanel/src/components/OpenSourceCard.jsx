@@ -7,7 +7,6 @@ export default function OpenSourceForm() {
     github_url: "",
     image: "",
     programming_language: "",
-    page_url: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,7 +18,6 @@ export default function OpenSourceForm() {
       [e.target.name]: e.target.value,
     }));
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,9 +56,7 @@ export default function OpenSourceForm() {
         github_url: "",
         image: "",
         programming_language: "",
-        page_url: "",
       });
-
     } catch (error) {
       setMessage(error.message);
     } finally {
@@ -68,83 +64,76 @@ export default function OpenSourceForm() {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-[#0d1117] py-10 px-4">
 
-      <div className="
-        mx-auto max-w-4xl
-        bg-[#161b22]
-        border border-white/10
-        rounded-3xl
-        p-10
-      ">
-
+      <div
+        className="
+          mx-auto max-w-4xl
+          bg-[#161b22]
+          border border-white/10
+          rounded-3xl
+          p-10
+        "
+      >
 
         <h1
           className="
-          mb-10
-          text-4xl
-          font-bold
-          text-center
-          bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400
-          bg-clip-text
-          text-transparent
+            mb-10
+            text-4xl
+            font-bold
+            text-center
+            bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400
+            bg-clip-text
+            text-transparent
           "
         >
           Open Source Projects Admin
         </h1>
 
-
-        <form 
+        <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-6"
         >
-
 
           {[
             {
               label: "Title *",
               name: "title",
               type: "text",
-              placeholder: "Project title"
+              placeholder: "Project title",
             },
             {
               label: "Github URL",
               name: "github_url",
               type: "url",
-              placeholder: "https://github.com/..."
+              placeholder: "https://github.com/...",
             },
             {
               label: "Image URL",
               name: "image",
               type: "url",
-              placeholder: "https://..."
+              placeholder: "https://...",
             },
             {
               label: "Programming Language",
               name: "programming_language",
               type: "text",
-              placeholder: "React, JavaScript, Python..."
+              placeholder: "React, JavaScript, Python...",
             },
-            {
-              label: "Page URL",
-              name: "page_url",
-              type: "text",
-              placeholder: "/project-page"
-            }
           ].map((input) => (
             <div key={input.name}>
 
-              <label className="
-                mb-2
-                block
-                font-medium
-                text-slate-300
-              ">
+              <label
+                className="
+                  mb-2
+                  block
+                  font-medium
+                  text-slate-300
+                "
+              >
                 {input.label}
               </label>
-
 
               <input
                 type={input.type}
@@ -171,19 +160,18 @@ export default function OpenSourceForm() {
             </div>
           ))}
 
-
-
           <div>
 
-            <label className="
-              mb-2
-              block
-              font-medium
-              text-slate-300
-            ">
+            <label
+              className="
+                mb-2
+                block
+                font-medium
+                text-slate-300
+              "
+            >
               Description
             </label>
-
 
             <textarea
               name="content"
@@ -210,8 +198,6 @@ export default function OpenSourceForm() {
 
           </div>
 
-
-
           <button
             type="submit"
             disabled={loading}
@@ -233,26 +219,22 @@ export default function OpenSourceForm() {
             {loading ? "Adding..." : "Add Project"}
           </button>
 
-
         </form>
-
-
 
         {message && (
           <div
             className="
-            mt-6
-            rounded-xl
-            border border-white/10
-            bg-[#0d1117]
-            p-4
-            text-slate-300
+              mt-6
+              rounded-xl
+              border border-white/10
+              bg-[#0d1117]
+              p-4
+              text-slate-300
             "
           >
             {message}
           </div>
         )}
-
 
       </div>
 

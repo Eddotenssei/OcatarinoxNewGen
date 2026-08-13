@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
 
+import { useNavigate } from "react-router";
+
+const createFileName = (title) => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
 export default function CodeCards() {
   const [activeFilter, setActiveFilter] = useState("ყველა");
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getCards() {
@@ -26,35 +37,34 @@ export default function CodeCards() {
   }, []);
 
   // Create individual language filters
-const languages = [
-  "ყველა",
-  ...new Set(
-    cards.flatMap((card) =>
-      card.programming_language
-        ? card.programming_language
-            .split(",")
-            .map((lang) => lang.trim())
-            .filter(Boolean)
-            .map(
-              (lang) =>
-                lang.charAt(0).toUpperCase() +
-                lang.slice(1).toLowerCase()
-            )
-        : []
-    )
-  ),
-];
+  const languages = [
+    "ყველა",
+    ...new Set(
+      cards.flatMap((card) =>
+        card.programming_language
+          ? card.programming_language
+              .split(",")
+              .map((lang) => lang.trim())
+              .filter(Boolean)
+              .map(
+                (lang) =>
+                  lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase(),
+              )
+          : [],
+      ),
+    ),
+  ];
 
   // Filter cards by selected language
-const filteredCards =
-  activeFilter === "ყველა"
-    ? cards
-    : cards.filter((card) =>
-        card.programming_language
-          ?.split(",")
-          .map((lang) => lang.trim().toLowerCase())
-          .includes(activeFilter.toLowerCase())
-      );
+  const filteredCards =
+    activeFilter === "ყველა"
+      ? cards
+      : cards.filter((card) =>
+          card.programming_language
+            ?.split(",")
+            .map((lang) => lang.trim().toLowerCase())
+            .includes(activeFilter.toLowerCase()),
+        );
 
   if (loading) {
     return (
@@ -67,7 +77,6 @@ const filteredCards =
   return (
     <div className="min-h-screen bg-[#0a0a14] font-mono text-gray-200 p-6 flex flex-col items-center justify-center">
       <div className="w-full max-w-[1330px] min-h-[650px] bg-[#11111b]/50 rounded-2xl border border-white/5 py-[72px] px-10 shadow-xl backdrop-blur-sm flex flex-col">
-
         {/* Filter Buttons */}
         <div className="flex justify-between items-center gap-4 mb-8 pb-6 border-b border-white/5">
           <div className="flex gap-2 flex-wrap">
@@ -90,11 +99,8 @@ const filteredCards =
             })}
           </div>
 
-          <p className="text-gray-500 text-xs">
-            {filteredCards.length} ბარათი
-          </p>
+          <p className="text-gray-500 text-xs">{filteredCards.length} ბარათი</p>
         </div>
-
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
@@ -102,13 +108,11 @@ const filteredCards =
             <div
               key={card.id}
               onClick={() => {
-                if (card.page_url) {
-                  window.open(card.page_url, "_blank");
-                }
+                const slug = createFileName(card.title);
+                navigate(`/projects/${slug}`);
               }}
               className="bg-[#11111b] border border-white/5 rounded-xl p-5 cursor-pointer hover:border-white/20 transition-all hover:-translate-y-1 flex flex-col"
             >
-
               {card.image && (
                 <img
                   src={card.image}
@@ -117,37 +121,27 @@ const filteredCards =
                 />
               )}
 
-
               {/* Language Tags */}
               <div className="flex flex-wrap gap-2 mb-3">
-                {card.programming_language
-                  ?.split(",")
-                  .map((lang) => (
-                    <span
-                      key={lang}
-                      className="text-[10px] font-bold px-2.5 py-1 rounded bg-blue-500/10 text-blue-400"
-                    >
-                      {lang.trim()}
-                    </span>
-                  ))}
+                {card.programming_language?.split(",").map((lang) => (
+                  <span
+                    key={lang}
+                    className="text-[10px] font-bold px-2.5 py-1 rounded bg-blue-500/10 text-blue-400"
+                  >
+                    {lang.trim()}
+                  </span>
+                ))}
               </div>
-
 
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-white font-bold text-sm">
-                  {card.title}
-                </h3>
+                <h3 className="text-white font-bold text-sm">{card.title}</h3>
 
-                <span className="text-gray-600 text-sm">
-                  ↗
-                </span>
+                <span className="text-gray-600 text-sm">↗</span>
               </div>
-
 
               <p className="text-gray-400 text-[11px] leading-relaxed">
                 {card.content}
               </p>
-
 
               {card.github_url && (
                 <a
@@ -160,18 +154,15 @@ const filteredCards =
                   GitHub →
                 </a>
               )}
-
             </div>
           ))}
         </div>
-
 
         {filteredCards.length === 0 && (
           <div className="text-center text-gray-600 text-sm my-auto py-16">
             ბარათები ვერ მოიძებნა
           </div>
         )}
-
       </div>
     </div>
   );

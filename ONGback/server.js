@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import openSourceCardsRouter from "./routes/openSourceCards.js";
 import blogsRouter from "./routes/blogs.js";
@@ -9,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/uploads", express.static("uploads"));
+
 app.use("/api/openSourceCards", openSourceCardsRouter);
 app.use("/api/blogs", blogsRouter);
 

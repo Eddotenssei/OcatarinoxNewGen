@@ -1,18 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import './App.css'
+import "./App.css";
 
+import Layout from "./layouts/layout";
+import Home from "./pages/home";
+import Contact from "./pages/contact";
+import AboutUS from "./pages/aboutUs";
+import Blogs from "./pages/Blogs";
 
-
-import Layout from './layouts/layout';
-import Home from './pages/home';
-import Contact from './pages/contact';
-import AboutUS from './pages/aboutUs';
-import Blogs from './pages/Blogs';
-
-
-
+import { generatedRoutes } from "./pages/generated/generatedRoutes";
 
 const router = createBrowserRouter([
   {
@@ -21,27 +18,28 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "/aboutUs",
-        element: <AboutUS />
+        element: <AboutUS />,
       },
       {
         path: "/contact",
-        element: <Contact />
+        element: <Contact />,
       },
       {
         path: "/blogs",
-        element: <Blogs />
-      }
+        element: <Blogs />,
+      },
 
+      ...generatedRoutes,
     ],
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </StrictMode>,
-)
+);
