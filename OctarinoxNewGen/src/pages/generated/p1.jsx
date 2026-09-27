@@ -1,24 +1,24 @@
 
 import React from "react";
 
-function Project7() {
+function Project10() {
     return (
         <main>
-            <h1>sada</h1>
+            <h1>p1</h1>
 
             <img
                 src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
-                alt="sada"
+                alt="p1"
             />
 
-            <p>sadad</p>
+            <p>cda 1</p>
 
             <p>
-                Language: React, JavaScript, Node.js
+                Language: react
             </p>
 
             <a
-                href="https://github.com/"
+                href="https://github.com/example/task-manager"
                 target="_blank"
                 rel="noreferrer"
             >
@@ -36,4 +36,4 @@ function Project7() {
     );
 }
 
-export default Project7;
+export default Project10;

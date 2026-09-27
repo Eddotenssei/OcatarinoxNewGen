@@ -1,8 +1,17 @@
-import "dotenv/config";
+
+import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+    path: path.join(__dirname, "../.env")
+});
 
 const supabase = createClient(
     process.env.VITE_SUPABASE_URL,
@@ -21,9 +30,6 @@ if (error) {
 
 console.log(`Found ${data.length} projects`);
 
-// Get the current script directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Folder where generated React files will be created
 const outputDirectory = path.join(
