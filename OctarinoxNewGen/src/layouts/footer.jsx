@@ -1,80 +1,75 @@
+
 export default function Footer() {
+  const groups = [
+    {
+      title: "projects",
+      items: [
+        ["Argus", "/projects/argus"],
+        ["OCTAR LAB", "/projects/octar-lab"],
+        ["Clinic OS", "/projects/clinic-os"],
+      ],
+    },
+    {
+      title: "octarinox",
+      items: [
+        ["About", "/about"],
+        ["Services ↗", null],
+        ["Contact ↗", null],
+      ],
+    },
+    {
+      title: "community",
+      items: [
+        ["GitHub ↗", null],
+        ["Issues ↗", null],
+        ["Discussions ↗", null],
+      ],
+    },
+  ];
+
   return (
-    <footer className="w-full bg-[#0a0a14] text-gray-400 border-t border-white/10 mt-20">
+    <footer className="grid grid-cols-1 gap-6 border-t border-line bg-[#a07bff33] px-[5%] py-6 backdrop-blur-[5px] sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(105px,150px))]">
+      <div>
+        <a href="/home" className="text-xl font-bold">
+          Octarinox
+        </a>
 
-      <div className="max-w-[1330px] mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <p className="mt-2 text-sm text-muted">
+          IT venture studio, Tbilisi, Georgia
+        </p>
 
-        {/* Brand */}
-        <div>
-          <h2 className="
-            text-lg font-bold mb-3
-            bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
-            bg-clip-text text-transparent
-          ">
-            Octarinox
+        <p className="mt-1 text-sm">
+          Built at Octarinox. Open for everyone.
+        </p>
+
+        <p className="mt-3 max-w-[700px] font-mono text-[10px] leading-relaxed text-muted">
+          © 2026 Octarinox LLC · Code licensed under MIT and Apache-2.0 ·
+          Site content CC BY 4.0
+        </p>
+      </div>
+
+      {groups.map((group) => (
+        <div
+          key={group.title}
+          className="flex flex-col items-start gap-2 text-sm"
+        >
+          <h2 className="font-mono text-xs text-muted">
+            {group.title}
           </h2>
 
-          <p className="text-sm leading-relaxed">
-            A collection of open-source projects, code snippets, and experiments
-            built for learning and sharing.
-          </p>
+          {group.items.map(([label, href]) =>
+            href ? (
+              <a key={label} href={href}>
+                {label}
+              </a>
+            ) : (
+              <span key={label} aria-disabled="true">
+                {label}
+              </span>
+            ),
+          )}
         </div>
-
-        {/* Contact */}
-        <div>
-          <h3 className="
-            text-sm font-semibold mb-3
-            bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
-            bg-clip-text text-transparent
-          ">
-            Contact
-          </h3>
-
-          <p className="text-sm">📍 Tbilisi, Georgia</p>
-          <p className="text-sm">📧 octarinox.dev@example.com</p>
-          <p className="text-sm">📞 +995 555 12 34 56</p>
-        </div>
-
-        {/* Links */}
-        <div>
-          <h3 className="
-            text-sm font-semibold mb-3
-            bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
-            bg-clip-text text-transparent
-          ">
-            Links
-          </h3>
-
-          <ul className="space-y-2 text-sm">
-            <li>
-              <a href="#" className="hover:text-fuchsia-400 transition">
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-fuchsia-400 transition">
-                Projects
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-fuchsia-400 transition">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-fuchsia-400 transition">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-white/10 text-center py-4 text-xs text-gray-500">
-        © {new Date().getFullYear()} Octarinox. All rights reserved.
-      </div>
+      ))}
     </footer>
   );
 }

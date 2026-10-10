@@ -1,58 +1,44 @@
-import { Link } from "react-router";
 
 export default function Navbar() {
   return (
-    <nav className="bg-gray-900 text-white px-10 py-5 shadow-md border-b border-white/10 flex items-center justify-between">
-      {/* Brand */}
+    <header className="flex flex-wrap items-center gap-4 border-b border-line px-[5%] py-4 sm:gap-6">
+      <a href="/home" className="text-xl font-bold">
+        Octarinox
+      </a>
 
-      <Link
-        to="/home"
-        className="
-      text-2xl font-extrabold tracking-wider
-      bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 
-      bg-clip-text text-transparent
-      "
+      <nav
+        className="ml-auto flex flex-wrap items-center gap-3 text-sm sm:gap-5"
+        aria-label="Main navigation"
       >
-        octarinoxNewGen
-      </Link>
+        <a
+          className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
+          href="/projects"
+        >
+          Projects
+        </a>
 
-      {/* Links */}
-      <ul className="flex gap-10 items-center text-xl font-medium tracking-wide">
-        <li>
-          <Link
-            to="/home"
-            className="hover:text-fuchsia-400 transition-colors duration-200"
-          >
-            Home
-          </Link>
-        </li>
+        <a
+          className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
+          href="/why-open-source"
+        >
+          Why open source
+        </a>
 
-        <li>
-          <Link
-            to="/aboutUs"
-            className="hover:text-fuchsia-400 transition-colors duration-200"
-          >
-            About us
-          </Link>
-        </li>
+        <a
+          className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
+          href="/about"
+        >
+          About
+        </a>
+      </nav>
 
-        <li>
-          <Link
-            to="/contact"
-            className="hover:text-fuchsia-400 transition-colors duration-200"
-          >
-            Contact
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/blogs"
-            className="hover:text-fuchsia-400 transition-colors duration-200"
-          >
-            Blogs
-          </Link>
-        </li>
-      </ul>
-    </nav>
+      <span aria-hidden="true" className="text-muted">
+        ◐
+      </span>
+
+      <span className="font-mono text-xs" aria-disabled="true">
+        GitHub ↗
+      </span>
+    </header>
   );
 }

@@ -1,4 +1,38 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400&display=swap");
 @import "tailwindcss";
-body{
-    background-color: #0A0A14;
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-cream: #dcd9d2;
+  --color-muted: #7f7d86;
+  --color-accent: #a07bff;
+  --color-line: #2a2a2e;
+}
+
+body {
+  margin: 0;
+  background: #111113;
+}
+
+/* Custom background effect: intentionally kept in CSS. */
+.ox-home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/images/home-background.png") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* Shared interactive states, scoped to the Home page. */
+.ox-home a:hover {
+  color: #fff;
+}
+
+.ox-home :is(a, button):focus-visible {
+  outline: 2px solid #a07bff;
+  outline-offset: 4px;
 }
