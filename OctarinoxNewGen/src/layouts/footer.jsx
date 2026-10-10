@@ -35,7 +35,7 @@ export default function Footer() {
           octarinox
         </h2>
 
-        <a href="/about">About</a>
+        <a href="/aboutUs">About us</a>
         <span aria-disabled="true">Services ↗</span>
         <span aria-disabled="true">Contact ↗</span>
       </div>

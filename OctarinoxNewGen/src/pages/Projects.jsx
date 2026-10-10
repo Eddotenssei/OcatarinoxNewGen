@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { supabase } from "../services/supabase";
 import "../assets/Projects.css";
+import codeRain from "../assets/octarinox-code-rain-main1440x2120.gif";
+
 
 const createFileName = (title) => {
   return title
@@ -88,7 +90,8 @@ export default function CodeCards() {
   }
 
   return (
-    <div className="ox-projects">
+    <div className="ox-projects"
+    style={{ backgroundImage: `url(${codeRain})` }}>
       <main className="flex-1">
         <h1 className="projects-tagline">
           Built at Octarinox. Open for everyone.

@@ -9,7 +9,7 @@ import Contact from "./pages/contact";
 import AboutUS from "./pages/aboutUs";
 import Blogs from "./pages/Blogs";
 import Projects from "./pages/Projects";
-// import CodeCards from "./pages/Projects";
+import WhyOpenSource from "./pages/WhyOpenSource";
 
 import { generatedRoutes } from "./pages/generated/generatedRoutes";
 
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUS />,
+      },
+      {
+        path: "/why-open-source",
+        element: <WhyOpenSource />,
       },
       {
         path: "/Projects",

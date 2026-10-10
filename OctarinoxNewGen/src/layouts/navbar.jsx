@@ -34,7 +34,7 @@ export default function Navbar() {
           className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
           href="/aboutUs"
         >
-          About
+          About us
         </a>
       </nav>
 
