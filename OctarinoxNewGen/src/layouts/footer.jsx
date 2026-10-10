@@ -1,34 +1,6 @@
-
 export default function Footer() {
-  const groups = [
-    {
-      title: "projects",
-      items: [
-        ["Argus", "/projects/argus"],
-        ["OCTAR LAB", "/projects/octar-lab"],
-        ["Clinic OS", "/projects/clinic-os"],
-      ],
-    },
-    {
-      title: "octarinox",
-      items: [
-        ["About", "/about"],
-        ["Services ↗", null],
-        ["Contact ↗", null],
-      ],
-    },
-    {
-      title: "community",
-      items: [
-        ["GitHub ↗", null],
-        ["Issues ↗", null],
-        ["Discussions ↗", null],
-      ],
-    },
-  ];
-
   return (
-    <footer className="grid grid-cols-1 gap-6 border-t border-line bg-[#a07bff33] px-[5%] py-6 backdrop-blur-[5px] sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(105px,150px))]">
+    <footer className="text-white grid grid-cols-1 gap-6 border-t border-line bg-[#a07bff33] px-[5%] py-6 backdrop-blur-[5px] sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(105px,150px))]">
       <div>
         <a href="/home" className="text-xl font-bold">
           Octarinox
@@ -48,28 +20,35 @@ export default function Footer() {
         </p>
       </div>
 
-      {groups.map((group) => (
-        <div
-          key={group.title}
-          className="flex flex-col items-start gap-2 text-sm"
-        >
-          <h2 className="font-mono text-xs text-muted">
-            {group.title}
-          </h2>
+      <div className="flex flex-col items-start gap-2 text-sm">
+        <h2 className="font-mono text-xs text-muted">
+          projects
+        </h2>
 
-          {group.items.map(([label, href]) =>
-            href ? (
-              <a key={label} href={href}>
-                {label}
-              </a>
-            ) : (
-              <span key={label} aria-disabled="true">
-                {label}
-              </span>
-            ),
-          )}
-        </div>
-      ))}
+        <a href="/projects/argus">Argus</a>
+        <a href="/projects/octar-lab">OCTAR LAB</a>
+        <a href="/projects/clinic-os">Clinic OS</a>
+      </div>
+
+      <div className="flex flex-col items-start gap-2 text-sm">
+        <h2 className="font-mono text-xs text-muted">
+          octarinox
+        </h2>
+
+        <a href="/about">About</a>
+        <span aria-disabled="true">Services ↗</span>
+        <span aria-disabled="true">Contact ↗</span>
+      </div>
+
+      <div className="flex flex-col items-start gap-2 text-sm">
+        <h2 className="font-mono text-xs text-muted">
+          community
+        </h2>
+
+        <span aria-disabled="true">GitHub ↗</span>
+        <span aria-disabled="true">Issues ↗</span>
+        <span aria-disabled="true">Discussions ↗</span>
+      </div>
     </footer>
   );
 }

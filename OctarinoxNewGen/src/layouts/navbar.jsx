@@ -1,7 +1,6 @@
-
 export default function Navbar() {
   return (
-    <header className="flex flex-wrap items-center gap-4 border-b border-line px-[5%] py-4 sm:gap-6">
+    <header className="flex flex-wrap items-center gap-4 border-b border-line px-[5%] py-4 text-white sm:gap-6">
       <a href="/home" className="text-xl font-bold">
         Octarinox
       </a>
@@ -16,6 +15,7 @@ export default function Navbar() {
         >
           Home
         </a>
+
         <a
           className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
           href="/projects"
@@ -38,7 +38,7 @@ export default function Navbar() {
         </a>
       </nav>
 
-      <span aria-hidden="true" className="text-muted">
+      <span aria-hidden="true">
         ◐
       </span>
 

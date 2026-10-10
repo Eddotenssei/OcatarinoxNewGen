@@ -52,11 +52,10 @@ export default function CodeCards() {
               .filter(Boolean)
               .map(
                 (lang) =>
-                  lang.charAt(0).toUpperCase() +
-                  lang.slice(1).toLowerCase()
+                  lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase(),
               )
-          : []
-      )
+          : [],
+      ),
     ),
   ];
 
@@ -68,7 +67,7 @@ export default function CodeCards() {
           card.programming_language
             ?.split(",")
             .map((lang) => lang.trim().toLowerCase())
-            .includes(activeFilter.toLowerCase())
+            .includes(activeFilter.toLowerCase()),
         );
 
   if (loading) {
@@ -80,9 +79,7 @@ export default function CodeCards() {
               className="projects-directory"
               aria-label="Project directory"
             >
-              <p className="projects-intro text-muted">
-                Loading projects...
-              </p>
+              <p className="projects-intro text-muted">Loading projects...</p>
             </section>
           </div>
         </main>
@@ -116,7 +113,7 @@ export default function CodeCards() {
               role="group"
               aria-label="Filter projects by programming language"
             >
-              <div className="flex flex-wrap gap-3">
+              <div className="projects-filter-list">
                 {languages.map((lang) => (
                   <button
                     type="button"
@@ -165,24 +162,16 @@ export default function CodeCards() {
                 >
                   <div className="projects-preview">
                     {card.image ? (
-                      <img
-                        src={card.image}
-                        alt={card.title}
-                        loading="lazy"
-                      />
+                      <img src={card.image} alt={card.title} loading="lazy" />
                     ) : (
-                      <span>
-                        {languages?.[0] ?? "Open source"}
-                      </span>
+                      <span>{languages?.[0] ?? "Open source"}</span>
                     )}
                   </div>
 
                   <div className="projects-details">
                     <div>
                       <h2>
-                        <span className="projects-title">
-                          {card.title}
-                        </span>
+                        <span className="projects-title">{card.title}</span>
                       </h2>
 
                       <p className="mt-3 font-mono text-xs text-muted">
@@ -217,9 +206,7 @@ export default function CodeCards() {
             {!filteredCards.length && (
               <div className="py-24 text-center">
                 <h2 className="text-xl">
-                  {cards.length
-                    ? "No projects found"
-                    : "No projects available"}
+                  {cards.length ? "No projects found" : "No projects available"}
                 </h2>
 
                 {cards.length > 0 && activeFilter !== "ყველა" && (
