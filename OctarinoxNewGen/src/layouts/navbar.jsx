@@ -12,6 +12,12 @@ export default function Navbar() {
       >
         <a
           className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
+          href="/home"
+        >
+          Home
+        </a>
+        <a
+          className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
           href="/projects"
         >
           Projects
@@ -26,7 +32,7 @@ export default function Navbar() {
 
         <a
           className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
-          href="/about"
+          href="/aboutUs"
         >
           About
         </a>
