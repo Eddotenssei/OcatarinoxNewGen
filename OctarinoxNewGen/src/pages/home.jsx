@@ -1,3 +1,4 @@
+import codeRain from "../assets/octarinox-code-rain-main1440x2120.gif";
 
 const projects = [
   {
@@ -76,7 +77,9 @@ function Section({ label, children }) {
 
 export default function Home() {
   return (
-    <div className="ox-home relative isolate mx-auto flex min-h-[max(100vh,clamp(900px,66.667vw,1280px))] w-full max-w-[1920px] flex-1 flex-col overflow-x-clip bg-[#111113] font-sans text-cream">
+    <div className="ox-home relative isolate mx-auto flex min-h-[max(100vh,clamp(900px,66.667vw,1280px))] w-full max-w-[1920px] flex-1 flex-col overflow-x-clip bg-[#111113] font-sans text-cream"
+      style={{ backgroundImage: `url(${codeRain})` }}
+>
 
       <main className="flex-1">
         <section className="px-[5%] py-[35px] pb-[42px] md:pl-[13%]">
