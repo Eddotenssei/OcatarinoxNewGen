@@ -45,9 +45,11 @@ export default function Footer() {
           community
         </h2>
 
-        <span aria-disabled="true">GitHub ↗</span>
+        <a href="https://github.com/octarinox" target="_blank" rel="noopener noreferrer">
+          GitHub ↗
+        </a>
         <span aria-disabled="true">Issues ↗</span>
-        <span aria-disabled="true">Discussions ↗</span>
+        <span aria-disabled="true"><a href="/blogs" target="_blank" rel="noopener noreferrer">Blogs ↗</a></span>
       </div>
     </footer>
   );

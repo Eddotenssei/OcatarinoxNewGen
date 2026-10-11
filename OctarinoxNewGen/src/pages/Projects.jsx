@@ -14,7 +14,7 @@ const createFileName = (title) => {
 };
 
 export default function CodeCards() {
-  const [activeFilter, setActiveFilter] = useState("ყველა");
+  const [activeFilter, setActiveFilter] = useState("All");
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -63,7 +63,7 @@ export default function CodeCards() {
 
   // Filter projects by programming language.
   const filteredCards =
-    activeFilter === "ყველა"
+    activeFilter === "All"
       ? cards
       : cards.filter((card) =>
           card.programming_language
@@ -212,11 +212,11 @@ export default function CodeCards() {
                   {cards.length ? "No projects found" : "No projects available"}
                 </h2>
 
-                {cards.length > 0 && activeFilter !== "ყველა" && (
+                {cards.length > 0 && activeFilter !== "All" && (
                   <button
                     type="button"
                     className="mt-4 text-accent"
-                    onClick={() => setActiveFilter("ყველა")}
+                    onClick={() => setActiveFilter("All")}
                   >
                     Clear filters
                   </button>

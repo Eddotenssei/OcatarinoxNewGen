@@ -195,7 +195,7 @@ export default function Home() {
             </p>
 
             <div className="mt-2 flex flex-wrap gap-5 text-sm text-accent">
-              <a href="/about">More about Octarinox</a>
+              <a href="/aboutUs">More about Octarinox</a>
               <a
                 href="https://octarinox.com"
                 target="_blank"

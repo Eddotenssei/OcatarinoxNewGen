@@ -38,12 +38,12 @@ export default function Navbar() {
         </a>
       </nav>
 
-      <span aria-hidden="true">
-        ◐
-      </span>
+      
 
       <span className="font-mono text-xs" aria-disabled="true">
-        GitHub ↗
+        <a href="https://github.com/octarinox" target="_blank" rel="noopener noreferrer">
+          GitHub ↗
+        </a>
       </span>
     </header>
   );
