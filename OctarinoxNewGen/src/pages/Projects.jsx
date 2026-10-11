@@ -44,7 +44,7 @@ export default function CodeCards() {
 
   // Build language filters dynamically from Supabase data.
   const languages = [
-    "ყველა",
+    "All",
     ...new Set(
       cards.flatMap((card) =>
         card.programming_language
