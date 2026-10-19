@@ -6,6 +6,7 @@ import Project11 from "./dasda.jsx";
 import Project12 from "./gasatesti-tema.jsx";
 import Project13 from "./fsdfsdfsdf.jsx";
 import Project14 from "./weeadsadw.jsx";
+import Project15 from "./fhgfhfhfgh.jsx";
 
 export const generatedRoutes = [
     
@@ -36,6 +37,12 @@ export const generatedRoutes = [
     {
         path: "/projects/weeadsadw",
         element: <Project14 />
+    }
+,
+
+    {
+        path: "/projects/fhgfhfhfgh",
+        element: <Project15 />
     }
 
 ];

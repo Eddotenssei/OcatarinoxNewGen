@@ -29,6 +29,12 @@ export default function Navbar() {
         >
           Why open source
         </a>
+        <a
+          className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
+          href="/blogs"
+        >
+          Blogs
+        </a>
 
         <a
           className="whitespace-nowrap rounded-full border border-[#a07bff55] bg-[#a07bff33] px-[10px] py-0.5"
