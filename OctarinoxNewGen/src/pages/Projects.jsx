@@ -5,14 +5,17 @@ import "../assets/Projects.css";
 import codeRain from "../assets/octarinox-code-rain-main1440x2120.gif";
 
 
-const createFileName = (title) => {
-  return title
+
+
+const createProjectSlug = (title, id) => {
+  const slug = title
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-};
 
+  return `${slug}-${id}`;
+};
 export default function CodeCards() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [cards, setCards] = useState([]);
@@ -140,7 +143,7 @@ export default function CodeCards() {
 
             {/* Projects fetched from Supabase */}
             {filteredCards.map((card) => {
-              const slug = createFileName(card.title);
+              const slug = createProjectSlug(card.title, card.id);
 
               const languages = card.programming_language
                 ?.split(",")
@@ -163,7 +166,7 @@ export default function CodeCards() {
                   aria-label={`View project ${card.title}`}
                   style={{ cursor: "pointer" }}
                 >
-                  <div className="projects-preview">
+                  <div>
                     {card.image ? (
                       <img src={card.image} alt={card.title} loading="lazy" />
                     ) : (

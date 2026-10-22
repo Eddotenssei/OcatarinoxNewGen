@@ -9,7 +9,9 @@
   --color-accent: #a07bff;
   --color-line: #2a2a2e;
 }
-
+img {
+  border-radius: 12px;
+}
 body {
   margin: 0;
   background: #111113;
