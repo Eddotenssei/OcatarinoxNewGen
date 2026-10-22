@@ -10,7 +10,6 @@ import AboutUS from "./pages/aboutUs";
 import Blogs from "./pages/Blogs";
 import Projects from "./pages/Projects";
 import WhyOpenSource from "./pages/WhyOpenSource";
-import Test from "./pages/test";
 
 import { generatedRoutes } from "./pages/generated/generatedRoutes";
 
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
-      },
-      {
-        path: "/test",
-        element: <Test />,
       },
       {
         path: "/aboutUs",
