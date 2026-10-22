@@ -1,299 +1,149 @@
-import "../assets/Test.css";
-import { useLayoutEffect, useRef, useState } from "react";
+import React from "react";
+// import { ArrowUpRight, Star } from "lucide-react";
+import "../assets/test.css";
 
-import codeRain from "../assets/octarinox-code-rain-main1440x2120.gif";
-
-
-/*
- * Tuple format:
- * [x, y, width, height, fontSize, fontWeight,
- *  color, fontFamily, text, alignment?, vertical?]
- *
- * The original layer order and duplicate text layers are preserved.
- */
-
-const underlayText = [
-  [1680, 20, 53.333336, 10.264151, 16, 600, "white", "inter", "About"],
-  [1521, 17, 136, 10, 16, 600, "white", "inter", "Why open source"],
-  [1425, 17, 72, 15, 16, 600, "white", "inter", "Projects"],
-  [
-    466, 339, 852, 51, 48, 400, "muted", "inter",
-    "Built at Octarinox. Open for everyone.\n\n",
-  ],
-];
-
-const textLayers = [
-  // Header
-  [69, 9, 116, 22, 22, 700, "cream", "inter", "Octarinox"],
-  [1425, 15, 72, 10.264151, 16, 400, "white", "inter", "Projects"],
-  [1521, 15, 134, 10, 16, 400, "white", "inter", "Why open source"],
-  [1521, 15, 134, 10, 16, 400, "white", "inter", "Why open source"],
-  [1680, 15, 53.333336, 10.264151, 16, 400, "white", "inter", "About"],
-  [1780, 12, 16, 17, 18, 400, "muted", "mono", "◐"],
-  [1806, 14, 84, 16, 16, 400, "cream", "mono", "GitHub ↗", "right"],
-
-  // Hero
-  [250, 64, 756, 61.584908, 88, 700, "cream", "inter", "Tools we built"],
-  [
-    250, 146, 1412, 61.584908, 88, 700, "cream", "inter",
-    "Released as we use them.",
-  ],
-  [277, 268, 152, 17, 18, 400, "white", "inter", "Browse projects", "center"],
-  [488, 268, 140, 11, 18, 400, "cream", "inter", "View on GitHub", "center"],
-
-  // Projects label
-  [56, 430, 13, 226, 24, 400, "white", "inter", "projects", "left", true],
-
-  // Argus
-  [194, 435, 119, 35, 40, 700, "cream", "inter", "Argus"],
-  [194, 482, 45, 13, 12, 400, "muted", "mono", "v6.2.0"],
-  [
-    651, 450, 597, 21, 20, 400, "muted", "inter",
-    "Security and QA scanning. Python CLI and a Tauri desktop GUI.",
-  ],
-  [1688, 472, 58.666664, 10.264151, 13, 400, "cream", "mono", "★ 142", "right"],
-  [
-    1362, 462, 285, 13, 15, 400, "muted", "mono",
-    "Python, Rust · MIT · 3 days ago", "right",
-  ],
-
-  // OCTAR LAB
-  [192, 512, 231, 40, 40, 700, "cream", "inter", "OCTAR LAB"],
-  [194, 560, 45, 12, 12, 400, "muted", "mono", "v1.4.0"],
-  [
-    692, 528, 556, 18, 20, 400, "muted", "inter",
-    "Desktop workbench for prompts, models and experiments.",
-  ],
-  [1693, 547, 48, 10.264151, 13, 400, "cream", "mono", "★ 87", "right"],
-  [
-    1355, 540, 298, 20, 15, 400, "muted", "mono",
-    "Python · Apache-2.0 · 9 days ago", "right",
-  ],
-
-  // Clinic OS
-  [192, 590, 179, 38, 40, 700, "muted", "inter", "Clinic OS"],
-  [192, 634, 52, 14, 12, 400, "muted", "mono", "pending"],
-  [1108, 608, 138, 21, 20, 400, "muted", "inter", "Copy pending."],
-  [1698, 624, 38.666668, 10.264151, 15, 400, "cream", "mono", "★ —", "right"],
-  [1565, 627, 51, 12, 12, 400, "muted", "mono", "— · — · ", "right"],
-
-  // Why
-  [54, 789, 20, 87, 24, 400, "white", "inter", "why", "left", true],
-  [
-    192, 702, 398, 22, 24, 700, "cream", "inter",
-    "We needed these tools ourselves.",
-  ],
-  [
-    195, 729, 433, 14, 15, 400, "muted", "inter",
-    "Every project here started as an internal requirement and ran",
-  ],
-  [
-    195, 744, 288, 14, 15, 400, "muted", "inter",
-    "in production before it was made public.",
-  ],
-  [192, 775, 221, 22, 24, 700, "cream", "inter", "Code beats slides."],
-  [
-    194, 802, 484, 18, 15, 400, "muted", "inter",
-    "When someone evaluates an engineering team, they need evidence.",
-  ],
-  [
-    194, 816, 290, 16, 15, 400, "muted", "inter",
-    "Our code is open. Read it, run it, judge it.",
-  ],
-  [
-    192, 852, 708, 23, 24, 700, "cream", "inter",
-    "The Georgian tech scene deserves more public engineering.",
-  ],
-  [
-    195, 876, 454, 14, 15, 400, "muted", "inter",
-    "Very little open engineering work comes out of the local market.",
-  ],
-  [
-    197, 890, 407, 14, 15, 400, "muted", "inter",
-    "We would rather help change that than complain about it.",
-  ],
-  [
-    192, 931, 477, 23, 24, 700, "cream", "inter",
-    "We borrow from open source constantly.",
-  ],
-  [
-    195, 956, 381, 14, 15, 400, "muted", "inter",
-    "Our entire stack sits on work other people gave away.",
-  ],
-  [
-    195, 972, 258, 14, 15, 400, "muted", "inter",
-    "Returning some of it is the minimum.",
-  ],
-  [
-    481, 744, 163, 17, 15, 400, "accent", "inter",
-    "Read the full version↗",
-  ],
-
-  // Who
-  [55, 1030, 15, 87, 24, 400, "white", "inter", "who", "left", true],
-  [
-    192, 1037, 682, 19, 20, 400, "cream", "inter",
-    "Octarinox is an IT venture studio in Tbilisi, Georgia. We build AI-powered",
-  ],
-  [
-    192, 1060, 559, 19, 20, 400, "cream", "inter",
-    "software products, some for our portfolio, some for clients.",
-  ],
-  [
-    193, 1082, 155, 14, 15, 400, "accent", "inter",
-    "More about Octarinox",
-  ],
-  [362, 1082, 120, 14, 15, 400, "accent", "inter", "octarinox.com ↗"],
-
-  // Footer brand
-  [95, 1183, 97, 18, 20, 700, "cream", "inter", "Octarinox"],
-  [
-    95, 1210, 236, 13, 15, 400, "muted", "inter",
-    "IT venture studio, Tbilisi, Georgia",
-  ],
-  [
-    95, 1230, 266, 14, 15, 400, "cream", "inter",
-    "Built at Octarinox. Open for everyone.",
-  ],
-
-  // Footer projects
-  [1395, 1190, 73, 16, 15, 400, "muted", "mono", "projects"],
-  [1395, 1209, 40, 14, 14, 400, "cream", "inter", "Argus"],
-  [1395, 1229, 80, 13, 14, 400, "cream", "inter", "OCTAR LAB"],
-  [1395, 1249, 63, 14, 14, 400, "cream", "inter", "Clinic OS"],
-
-  // Footer Octarinox
-  [1561, 1189, 87, 15, 16, 400, "muted", "mono", "octarinox"],
-  [1561, 1209, 41, 14, 14, 400, "cream", "inter", "About"],
-  [1561, 1229, 75, 15, 14, 400, "cream", "inter", "Services ↗"],
-  [1562, 1249, 73, 14, 14, 400, "cream", "inter", "Contact ↗"],
-
-  // Footer community
-  [1737, 1186, 87, 15, 16, 400, "muted", "mono", "community"],
-  [1737, 1209, 64, 14, 14, 400, "cream", "inter", "GitHub ↗"],
-  [1738, 1230, 62, 15, 14, 400, "cream", "inter", "Issues ↗"],
-  [1738, 1249, 97, 14, 14, 400, "cream", "inter", "Discussions ↗"],
-
-  // Copyright
-  [
-    82, 1254, 621, 10, 12, 400, "muted", "mono",
-    "© 2026 Octarinox LLC · Code licensed under MIT and Apache-2.0 · Site content CC BY 4.0",
-  ],
-];
-
-const statistics = [
-  { x: 387, width: 127, value: "3", label: " projects" },
-  { x: 776, width: 144, value: "14", label: " releases" },
-  { x: 1164, width: 124, value: "2", label: " licenses" },
-  { x: 1551, width: 193, value: "Built in", label: " Tbilisi" },
-];
-
-function TextLayer({ item }) {
-  const [
-    x,
-    y,
-    width,
-    height,
-    fontSize,
-    fontWeight,
-    color,
-    fontFamily,
-    text,
-    alignment = "left",
-    vertical = false,
-  ] = item;
-
+function Test() {
   return (
-    <span
-      className={
-        "home-text home-color-" + color +
-        (fontFamily === "mono" ? " home-mono" : "")
-      }
-      style={{
-        left: x,
-        top: y,
-        width,
-        height,
-        fontSize,
-        fontWeight,
-        textAlign: alignment,
-      }}
-    >
-      {vertical ? Array.from(text).join("\n") : text}
-    </span>
+    <div className="illustration" aria-label="Purple line-art illustration of a laboratory flask and experiment graph">
+      <svg viewBox="0 0 360 250" role="img" aria-hidden="true">
+        <defs>
+          <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#6d4ab3" strokeWidth=".45" opacity=".6" />
+          </pattern>
+          <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#9b6bff" stopOpacity=".55" />
+            <stop offset="100%" stopColor="#9b6bff" stopOpacity=".18" />
+          </linearGradient>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#e7d9ff" stopOpacity=".16" />
+            <stop offset="100%" stopColor="#9a6cff" stopOpacity=".04" />
+          </linearGradient>
+        </defs>
+        <rect width="360" height="250" fill="url(#grid)" opacity=".9" />
+        <path d="M15 15h14M15 15v14M345 15h-14M345 15v14M15 235h14M15 235v-14M345 235h-14M345 235v-14"
+          stroke="#ad8aff" strokeWidth="1.3" fill="none" />
+        <text x="28" y="31" fill="#a99ac7" fontSize="7" letterSpacing="1.2">OCTAR//LAB</text>
+        <text x="29" y="217" fill="#8d7aa8" fontSize="7" letterSpacing=".8">RUN 014 · PyQt6</text>
+        {/* flask */}
+        <path d="M112 38h32M118 38v52L82 177Q79 184 89 184h78q10 0 6-8L137 90V38"
+          fill="url(#glass)" stroke="#dfd0ff" strokeWidth="2.2" strokeLinejoin="round" />
+        <path d="M101 137h53l20 40q2 5-5 5H87q-6 0-3-6z" fill="url(#liquid)" stroke="#a47cff" strokeWidth="1" />
+        <path d="M112 137h42" stroke="#d3bfff" strokeWidth="1.1" />
+        <path d="M118 43v47L88 169M137 43v47l32 79" fill="none" stroke="#fff" strokeWidth=".8" opacity=".5" />
+        <circle cx="124" cy="116" r="4" fill="none" stroke="#d8c7ff" strokeWidth="1" />
+        <circle cx="138" cy="103" r="2.2" fill="none" stroke="#d8c7ff" strokeWidth=".8" />
+        <circle cx="146" cy="128" r="2.5" fill="none" stroke="#d8c7ff" strokeWidth=".8" />
+        <circle cx="117" cy="160" r="2.4" fill="none" stroke="#d8c7ff" strokeWidth=".8" />
+        <circle cx="135" cy="152" r="3" fill="none" stroke="#d8c7ff" strokeWidth=".8" />
+        <circle cx="155" cy="166" r="2" fill="none" stroke="#d8c7ff" strokeWidth=".8" />
+        {/* model graph */}
+        <g stroke="#a77cff" strokeWidth="1" fill="none" opacity=".9">
+          <path d="M235 57L292 86L329 44M292 86L253 130L322 134M235 57L329 44M292 86L322 134" />
+          <path d="M152 87C185 72 205 63 235 57M151 133C189 145 213 144 253 130" strokeDasharray="2 4" opacity=".7" />
+        </g>
+        <g fill="#6e4eae" stroke="#b69aff" strokeWidth="1.3">
+          <circle cx="235" cy="57" r="7.5"/><circle cx="292" cy="86" r="7.5"/>
+          <circle cx="329" cy="44" r="7.5"/><circle cx="253" cy="130" r="7.5"/>
+          <circle cx="322" cy="134" r="7.5"/>
+        </g>
+        <g fill="#cdb9ff">
+          <circle cx="235" cy="57" r="2"/><circle cx="292" cy="86" r="2"/>
+          <circle cx="329" cy="44" r="2"/><circle cx="253" cy="130" r="2"/>
+          <circle cx="322" cy="134" r="2"/>
+        </g>
+        {/* tiny terminal */}
+        <rect x="204" y="160" width="142" height="67" rx="5" fill="#141119" stroke="#6d4bb2" strokeWidth=".9" />
+        <path d="M204 172h142" stroke="#4b376b" strokeWidth=".8" />
+        <circle cx="212" cy="166" r="1.5" fill="#a982ff"/><circle cx="218" cy="166" r="1.5" fill="#8c6bd4"/><circle cx="224" cy="166" r="1.5" fill="#6f579f"/>
+        <text x="211" y="181" fontSize="5.8" fill="#b6a2dc">› experiment: eval("v1.4")</text>
+        <text x="307" y="181" fontSize="5.8" fill="#a78cff">loss 0.032</text>
+        <path d="M282 218l12-6 8 3 10-8 10 2 12-8 10-2" stroke="#a77cff" strokeWidth="1.3" fill="none" />
+        <path d="M282 222h60" stroke="#4c3a68" strokeWidth=".6" />
+      </svg>
+    </div>
   );
 }
 
-export default function Test() {
+function OctarinoxMark() {
   return (
-    <main className="home-artboard" aria-label="Octarinox home page"
-    style={{ backgroundImage: `url(${codeRain})` }}>
-      {/* These layers are below the background in the original design. */}
-      <div className="home-underlay" aria-hidden="true">
-        {underlayText.map((item, index) => (
-          <TextLayer key={index} item={item} />
-        ))}
+    <svg className="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#b68aff" />
+          <stop offset="1" stopColor="#6f2fe0" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#markGrad)" stroke="#a97aff" strokeWidth="1.2">
+        <path d="M31 4C43 4 51 12 51 21c0 8-7 13-14 10-6-3-5-9-1-12 4-3 9 0 9 4 4-8-4-17-14-19z"/>
+        <path d="M60 31C60 43 52 51 43 51c-8 0-13-7-10-14 3-6 9-5 12-1 3 4 0 9-4 9 8 4 17-4 19-14z"/>
+        <path d="M33 60C21 60 13 52 13 43c0-8 7-13 14-10 6 3 5 9 1 12-4 3-9 0-9-4-4 8 4 17 14 19z"/>
+        <path d="M4 33C4 21 12 13 21 13c8 0 13 7 10 14-3 6-9 5-12 1-3-4 0-9 4-9-8-4-17 4-19 14z"/>
+        <circle cx="32" cy="32" r="8" fill="#2b164b" />
+        <circle cx="32" cy="32" r="4" fill="#a87aff" stroke="none" />
+      </g>
+    </svg>
+  );
+}
+
+export default function App() {
+  return (
+    <main className="page">
+      <div className="layout">
+        <aside className="vertical-brand" aria-label="Octarinox Lab">
+          <span>O</span><span>C</span><span>T</span><span>A</span><span>R</span><span>-</span><span>L</span><span>A</span><span>B</span>
+        </aside>
+
+        <section className="main-column">
+          <p className="eyebrow">Desktop workbench for prompts, models and experiments, built in PyQt6</p>
+          <div className="chips">
+            <span>Apache-2.0</span>
+            <span>Python · PyQt6</span>
+            <span>v1.4.0</span>
+          </div>
+
+          <section className="content-section what-section">
+            <h2>What it does</h2>
+            <div className="text-panel description">
+              OCTAR LAB keeps prompt authoring, model configuration and experiment tracking in one local application.<br />
+              It runs locally. No hosted service required.
+            </div>
+          </section>
+
+          <section className="content-section readme-section">
+            <h2 className="readme-heading">readme</h2>
+            <div className="text-panel readme">
+              We wanted prompts, model settings and experiment notes in one place, on our own machines.<br />
+              It was in production use at Octarinox before we released it.
+            </div>
+          </section>
+        </section>
+
+        <aside className="right-column">
+          <div className="repo-meta">
+            <div className="repo-topline">
+              <span>octar-lab.mdx</span>
+              <a href="https://github.com/" target="_blank" rel="noreferrer" className="stars"> 142 GitHub</a>
+            </div>
+            <div className="meta-row"><span>language</span><span>Python, Rust</span></div>
+            <div className="meta-row"><span>version</span><span>v6.2.0</span></div>
+            <div className="meta-row"><span>released</span><span>12 Mar 2026</span></div>
+          </div>
+
+          <div className="actions">
+            <a className="button button-primary" href="https://github.com/" target="_blank" rel="noreferrer">View on GitHub</a>
+            <a className="button button-secondary" href="#readme">Documentation</a>
+          </div>
+
+          <Test />
+
+          <div className="built-by">
+            <span>Built at Octarinox</span>
+            <OctarinoxMark />
+            <span>Open for everyone</span>
+          </div>
+        </aside>
       </div>
-
-      {/*
-        Use a PNG exported from the original background rectangle,
-        retaining its existing 70% image-fill opacity.
-        No additional opacity is applied here.
-      */}
-
-
-      <div className="home-shapes" aria-hidden="true">
-        <div className="home-browse-background" />
-        <div className="home-github-background" />
-
-        <div className="home-nav-background home-nav-projects" />
-        <div className="home-nav-background home-nav-about" />
-        <div className="home-nav-background home-nav-why" />
-
-        <div className="home-statistics-glass" />
-        <div className="home-footer-glass" />
-      </div>
-
-      <div className="home-content">
-        {textLayers.map((item, index) => (
-          <TextLayer key={index} item={item} />
-        ))}
-
-        {statistics.map((stat) => (
-          <span
-            key={stat.x}
-            className="home-statistic home-mono"
-            style={{
-              left: stat.x,
-              top: 360,
-              width: stat.width,
-              height: 20,
-            }}
-          >
-            <span className="home-color-cream">{stat.value}</span>
-            <span className="home-color-muted">{stat.label}</span>
-          </span>
-        ))}
-      </div>
-
-      <div className="home-lines" aria-hidden="true">
-        <div
-          className="home-line"
-          style={{ left: 194, top: 573, width: 1613 }}
-        />
-        <div
-          className="home-line"
-          style={{ left: 195, top: 495, width: 1612 }}
-        />
-        <div
-          className="home-line"
-          style={{ left: 193, top: 652, width: 1614 }}
-        />
-        <div
-          className="home-line"
-          style={{ left: 0, top: 48, width: 1920 }}
-        />
-      </div>
+      <a className="site-link" href="https://octarinox.com/" target="_blank" rel="noreferrer">octarinox.com</a>
     </main>
   );
 }
